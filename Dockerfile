@@ -73,7 +73,7 @@ ENV ANDROID_HOME /opt/android-sdk
 ENV PATH ${PATH}:${KOTLIN_HOME}/bin:${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools/bin
 
 RUN mkdir /run/sshd
-RUN sed -i 's/#Port 22/Port 6001/' /etc/ssh/sshd_config
+RUN sed -i 's/#Port 22/Port 6010/' /etc/ssh/sshd_config
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
@@ -101,7 +101,7 @@ COPY --from=android_sdk_builder /opt/android-sdk /opt/android-sdk
 ARG GITHUB_USER=bydavy
 RUN mkdir ~/.ssh && curl -fsL https://github.com/$GITHUB_USER.keys > ~/.ssh/authorized_keys && chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
 
-EXPOSE 6001 60000:60010/udp
+EXPOSE 6010 60000:60010/udp
 
 WORKDIR /root
 COPY entrypoint.sh /bin/entrypoint.sh
