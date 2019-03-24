@@ -40,6 +40,7 @@ FROM ubuntu:18.10
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq && apt-get upgrade -y && apt-get install -qq -y \
+        ansible \
         build-essential \
         ca-certificates \
         curl \
