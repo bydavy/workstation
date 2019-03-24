@@ -62,6 +62,7 @@ RUN apt-get update -qq && apt-get upgrade -y && apt-get install -qq -y \
         sudo \
         tmux \
         unzip \
+        vifm \
         wget \
         && rm -rf /var/lib/apt/lists/*
 
