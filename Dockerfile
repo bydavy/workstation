@@ -39,6 +39,13 @@ RUN /opt/android-sdk/tools/bin/sdkmanager --update && \
 FROM ubuntu:18.10
 ENV DEBIAN_FRONTEND=noninteractive
 
+# 1Password
+COPY --from=onepassword_builder /usr/bin/op /usr/local/bin/
+# Kotlin
+COPY --from=kotlin_builder /opt/kotlinc /opt/kotlinc
+# Android SDK
+COPY --from=android_sdk_builder /opt/android-sdk /opt/android-sdk
+
 RUN apt-get update -qq && apt-get upgrade -y && apt-get install -qq -y \
         ansible \
         build-essential \
@@ -92,13 +99,6 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 
 # for correct colours in tmux
 ENV TERM screen-256color
-
-# 1Password
-COPY --from=onepassword_builder /usr/bin/op /usr/local/bin/
-# Kotlin
-COPY --from=kotlin_builder /opt/kotlinc /opt/kotlinc
-# Android SDK
-COPY --from=android_sdk_builder /opt/android-sdk /opt/android-sdk
 
 ARG GITHUB_USER=bydavy
 RUN mkdir ~/.ssh && curl -fsL https://github.com/$GITHUB_USER.keys > ~/.ssh/authorized_keys && chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
