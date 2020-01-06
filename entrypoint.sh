@@ -12,4 +12,8 @@ cd ~/.dotfiles
 cd
 . .bashrc
 
+if [ -f /data/secrets/pull-secrets.sh ]; then
+  /data/secrets/pull-secrets.sh
+fi
+
 /usr/sbin/sshd -D
