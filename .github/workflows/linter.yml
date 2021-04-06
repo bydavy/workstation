@@ -1,0 +1,12 @@
+name: linter
+
+on: push
+
+jobs:
+  linter:
+    name: Lint Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Hadolint Action
+        uses: brpaz/hadolint-action@v1.2.1

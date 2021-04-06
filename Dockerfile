@@ -103,7 +103,8 @@ ENV TERM screen-256color
 ARG GITHUB_USER=bydavy
 RUN mkdir ~/.ssh && curl -fsL https://github.com/$GITHUB_USER.keys > ~/.ssh/authorized_keys && chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
 
-EXPOSE 6010 60000:60010/udp
+EXPOSE 6010 
+EXPOSE 60000-60010/udp
 
 WORKDIR /root
 COPY entrypoint.sh /bin/entrypoint.sh
